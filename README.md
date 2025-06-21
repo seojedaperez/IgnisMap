@@ -83,7 +83,7 @@ npm run dev
 
 ```mermaid
 graph TB
-    subgraph "FlameForecast PWA"
+    subgraph "IgnisMap PWA"
         React["React 18 + TypeScript"]
         PWA["Service Workers"]
         Maps["Azure Maps + Leaflet"]
