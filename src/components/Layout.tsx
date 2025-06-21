@@ -39,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex items-center">
               <Flame className="h-7 w-7 text-ember-coral fire-icon mr-2" />
-              <h1 className="text-lg sm:text-xl font-bold text-ember-navy">FlameForecast</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-ember-navy">IgnisMap</h1>
             </div>
             
             {/* Desktop Navigation */}
