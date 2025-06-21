@@ -40,6 +40,7 @@ An advanced Progressive Web Application (PWA) for wildfire prediction, monitorin
 - Azure CLI
 - Azure account with available credits
 
+
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/seojedaperez/IgnisMap.git
@@ -51,17 +52,32 @@ cd IgnisMap
 npm install
 ```
 
-### 3. Configure Azure (Automated)
+### 3. Prerequisites for Azure Setup
+```bash
+# Install Azure CLI if not already installed
+# Visit: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+
+# Login to Azure
+az login
+```
+
+### 4. Configure Azure (Automated)
 ```bash
 # Run automated setup script
 chmod +x scripts/azure-setup.sh
 ./scripts/azure-setup.sh
-``` [9](#1-8) 
+```
 
-### 4. Run in development
+### 5. Configure environment variables
+```bash
+# The script will output the required keys at the end
+# Copy them to your .env file or application configuration
+```
+
+### 6. Run in development
 ```bash
 npm run dev
-``` [10](#1-9) 
+```
 
 ## 🏗️ System Architecture
 
