@@ -1,6 +1,6 @@
 {
   "name": "FlameForecast - Predicción de Incendios",
-  "short_name": "FlameForecast",
+  "short_name": "IgnisMap",
   "description": "Aplicación para predicción y monitoreo de incendios forestales usando Azure",
   "start_url": "/",
   "display": "standalone",
