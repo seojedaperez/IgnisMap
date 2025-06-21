@@ -74,10 +74,14 @@ graph TB
     end
     
     subgraph "Azure Services"
+        AzureMaps["Azure Maps S1"]
         Cosmos["Cosmos DB"]
         Functions["Azure Functions"]
-        AI["Cognitive Services"]
+        Cognitive["Cognitive Services"]
+        EventHub["Event Hubs"]
         Storage["Blob Storage"]
+        KeyVault["Key Vault"]
+        AppInsights["Application Insights"]
     end
     
     subgraph "Data Sources"
@@ -86,9 +90,18 @@ graph TB
         Bio["GBIF"]
     end
     
-    React --> Cosmos
-    Functions --> AI
-    NASA --> Functions
+    React --> AzureMaps
+    React --> Functions
+    Functions --> Cosmos
+    Functions --> Cognitive
+    Functions --> Storage
+    Functions --> AppInsights
+    EventHub --> Functions
+    KeyVault --> Functions
+    KeyVault --> Cosmos
+    KeyVault --> AzureMaps
+    
+    NASA --> EventHub
     Weather --> Functions
     Bio --> Functions
 ```
