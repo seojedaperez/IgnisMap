@@ -115,7 +115,7 @@ const Dashboard: React.FC = () => {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-xl sm:text-3xl font-bold text-ember-navy mb-1 sm:mb-2">
-          🔥 FlameForecast
+          🔥 IgnisMap
         </h1>
         <p className="text-xs sm:text-sm text-gray-600">
           Análisis avanzado con Microsoft Azure, Azure Cognitive Services y modelos tácticos profesionales
