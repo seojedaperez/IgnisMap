@@ -39,7 +39,7 @@ An advanced Progressive Web Application (PWA) for wildfire prediction, monitorin
 - Node.js 18+
 - Azure CLI
 - Azure account with available credits
-
+```
 
 ### 1. Clone the repository
 ```bash
