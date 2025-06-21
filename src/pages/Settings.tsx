@@ -52,7 +52,7 @@ const Settings: React.FC = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Configuración</h1>
-        <p className="text-gray-600">Personaliza tu experiencia con FlameForecast</p>
+        <p className="text-gray-600">Personaliza tu experiencia con IgnisMap</p>
       </div>
 
       {/* Azure Maps Configuration */}
