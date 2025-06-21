@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'FlameForecast - Predicción de Incendios',
-        short_name: 'FlameForecast',
+        name: 'IgnisMap - Predicción de Incendios',
+        short_name: 'IgnisMap',
         description: 'Aplicación para predicción y monitoreo de incendios forestales',
         theme_color: '#dc2626',
         background_color: '#ffffff',
