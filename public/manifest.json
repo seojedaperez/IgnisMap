@@ -1,7 +1,7 @@
 {
-  "name": "IgnisMap - Predicción de Incendios",
+  "name": "IgnisMap - Fire Prediction",
   "short_name": "IgnisMap",
-  "description": "Aplicación para predicción y monitoreo de incendios forestales usando Azure",
+  "description": "Application for forest fire prediction and monitoring using Azure",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
