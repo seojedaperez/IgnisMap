@@ -168,13 +168,6 @@ npm run build
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
-
-For technical support or questions:
-- 📧 Email: [your-email@example.com]
-- 🐛 Issues: [GitHub Issues](https://github.com/seojedaperez/IgnisMap/issues)
-- 📖 Wiki: [Complete Documentation](https://github.com/seojedaperez/IgnisMap/wiki)
-
 ## 🙏 Acknowledgments
 
 - **NASA FIRMS** for satellite data
@@ -185,4 +178,3 @@ For technical support or questions:
 ---
 
 **⚠️ Important**: This system is designed to assist in emergency decision-making, but should not be the only factor considered in critical situations. Always consult with local fire management experts.
-```
