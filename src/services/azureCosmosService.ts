@@ -122,7 +122,7 @@ class AzureCosmosService {
 
     try {
       const { resource } = await this.containers[containerName].items.upsert(item);
-      return resource as T;
+      return resource ? (resource as unknown as T) : null;
     } catch (error) {
       console.error(`Error updating item in ${String(containerName)}:`, error);
       return null;

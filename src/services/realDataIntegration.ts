@@ -263,8 +263,24 @@ class RealDataIntegrationService {
     return fires
   }
 
-  private categorizeInfrastructure(elements: any[]): any {
-    const infrastructure = {
+  private categorizeInfrastructure(elements: any[]): {
+    hospitals: any[]
+    schools: any[]
+    fireStations: any[]
+    powerPlants: any[]
+    waterSources: any[]
+    roads: any[]
+    buildings: any[]
+  } {
+    const infrastructure: {
+      hospitals: any[]
+      schools: any[]
+      fireStations: any[]
+      powerPlants: any[]
+      waterSources: any[]
+      roads: any[]
+      buildings: any[]
+    } = {
       hospitals: [],
       schools: [],
       fireStations: [],
@@ -274,7 +290,7 @@ class RealDataIntegrationService {
       buildings: []
     }
     
-    elements.forEach(element => {
+    elements.forEach((element: any) => {
       const tags = element.tags || {}
       
       if (tags.amenity === 'hospital') infrastructure.hospitals.push(element)

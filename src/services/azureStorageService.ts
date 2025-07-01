@@ -123,7 +123,7 @@ class AzureStorageService {
       
       // Convert stream to blob
       const chunks: Uint8Array[] = [];
-      const reader = downloadResponse.readableStreamBody.getReader();
+      const reader = (downloadResponse.readableStreamBody as any).getReader();
       
       let done = false;
       while (!done) {

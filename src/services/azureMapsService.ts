@@ -497,7 +497,7 @@ class AzureMapsService {
                 distance: route.summary.lengthInMeters,
                 duration: route.summary.travelTimeInSeconds,
                 trafficDelay: route.summary.trafficDelayInSeconds || 0,
-                roadConditions: 'clear',
+                roadConditions: 'clear' as 'clear' | 'congested' | 'blocked' | 'damaged',
                 capacity: 1,
                 alternativeRoutes: [],
                 safetyRating: 9,
@@ -514,7 +514,11 @@ class AzureMapsService {
           id: station.id,
           location: station.location,
           responseTime: 15, // Will be calculated above
-          resources: station.resources,
+          resources: station.resources.map(resource => ({
+            type: this.mapResourceType(resource.type),
+            count: resource.quantity,
+            available: resource.available
+          })),
           personnel: {
             total: 25,
             available: 20,
@@ -716,7 +720,7 @@ class AzureMapsService {
       distance: 5000 + Math.random() * 10000,
       duration: 600 + Math.random() * 1200,
       trafficDelay: Math.random() * 300,
-      roadConditions: 'clear' as const,
+      roadConditions: 'clear' as 'clear' | 'congested' | 'blocked' | 'damaged',
       capacity: 1000,
       alternativeRoutes: [],
       safetyRating: 8,
@@ -769,7 +773,11 @@ class AzureMapsService {
         id: station.id,
         location: station.location,
         responseTime: 15,
-        resources: station.resources,
+        resources: station.resources.map(resource => ({
+          type: this.mapResourceType(resource.type),
+          count: resource.quantity,
+          available: resource.available
+        })),
         personnel: { total: 25, available: 20, specialized: [] },
         deploymentRecommendation: {
           priority: 8,
@@ -978,6 +986,17 @@ class AzureMapsService {
     if (visibility < 1 || windSpeed > 25) return 'grounded'
     if (visibility < 3 || windSpeed > 15) return 'limited'
     return 'safe'
+  }
+
+  private mapResourceType(type: string): 'engine' | 'ladder' | 'rescue' | 'hazmat' | 'command' {
+    const typeMap: { [key: string]: 'engine' | 'ladder' | 'rescue' | 'hazmat' | 'command' } = {
+      'Fire Engines': 'engine',
+      'Ladder Trucks': 'ladder',
+      'Rescue Vehicles': 'rescue',
+      'Hazmat': 'hazmat',
+      'Command': 'command'
+    }
+    return typeMap[type] || 'engine'
   }
 
   private getDefaultWeatherImpact(): WeatherImpactAnalysis {

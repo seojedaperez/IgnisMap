@@ -162,7 +162,7 @@ class AzureSignalRService {
     }
     
     // If connected, remove the handler
-    if (this.connection && this.connectionState === 'connected') {
+    if (this.connection && this.connectionState === 'connected' && callback) {
       this.connection.off(eventName, callback);
     }
   }

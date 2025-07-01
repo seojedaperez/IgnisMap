@@ -55,6 +55,8 @@ export interface AzureServicesConfig {
 // Default configuration - will be overridden by user settings
 export const defaultAzureConfig: Partial<AzureServicesConfig> = {
   cosmos: {
+    endpoint: import.meta.env.VITE_AZURE_COSMOS_ENDPOINT || '',
+    key: import.meta.env.VITE_AZURE_COSMOS_KEY || '',
     databaseName: 'EmergencyDB',
     containers: {
       organizations: 'Organizations',
@@ -68,12 +70,16 @@ export const defaultAzureConfig: Partial<AzureServicesConfig> = {
     }
   },
   maps: {
+    subscriptionKey: import.meta.env.VITE_AZURE_MAPS_KEY || '',
     region: 'westeurope'
   },
   cognitive: {
+    endpoint: import.meta.env.VITE_AZURE_COGNITIVE_ENDPOINT || '',
+    key: import.meta.env.VITE_AZURE_COGNITIVE_KEY || '',
     region: 'westeurope'
   },
   eventHub: {
+    connectionString: import.meta.env.VITE_AZURE_EVENTHUB_CONNECTION || '',
     hubName: 'satellite-data'
   }
 }

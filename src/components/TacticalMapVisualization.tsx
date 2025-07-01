@@ -251,11 +251,11 @@ const TacticalMapVisualization: React.FC<TacticalMapVisualizationProps> = ({
     }
     
     // If we only have one point or none, generate a route that moves away from the fire
-    const startPoint = coordinates[0] || [fireLocation.latitude, fireLocation.longitude]
+    const startPoint = coordinates[0] || [fireLocation.latitude, fireLocation.longitude] as [number, number]
     
     // Calculate vector from fire to outside
-    const dx = startPoint[0] - fireLocation.latitude
-    const dy = startPoint[1] - fireLocation.longitude
+    const dx = (startPoint as [number, number])[0] - fireLocation.latitude
+    const dy = (startPoint as [number, number])[1] - fireLocation.longitude
     
     // Normalize the vector
     const length = Math.sqrt(dx * dx + dy * dy)
@@ -263,12 +263,12 @@ const TacticalMapVisualization: React.FC<TacticalMapVisualizationProps> = ({
     const normalizedDy = dy / (length || 1)
     
     // If the starting point is very close to the fire, move it a bit outward
-    const adjustedStartPoint: LatLngExpression = length < 0.01 ? 
+    const adjustedStartPoint: [number, number] = length < 0.01 ? 
       [fireLocation.latitude + normalizedDx * 0.01, fireLocation.longitude + normalizedDy * 0.01] : 
-      startPoint
+      startPoint as [number, number]
     
     // Generate end point moving away from the fire
-    const endPoint: LatLngExpression = [
+    const endPoint: [number, number] = [
       adjustedStartPoint[0] + normalizedDx * 0.03,
       adjustedStartPoint[1] + normalizedDy * 0.03
     ]

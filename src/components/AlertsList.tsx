@@ -2,7 +2,7 @@ import React from 'react'
 import { AlertTriangle, Clock, CheckCircle } from 'lucide-react'
 import { useAlerts } from '../contexts/AlertContext'
 import { format } from 'date-fns'
-import { en } from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 
 const AlertsList: React.FC = () => {
   const { alerts } = useAlerts()
@@ -78,7 +78,7 @@ const AlertsList: React.FC = () => {
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span className="truncate text-[10px] sm:text-xs">{alert.location}</span>
                     <span className="flex-shrink-0 ml-1 sm:ml-2 text-[10px] sm:text-xs">
-                      {format(new Date(alert.timestamp), 'HH:mm', { locale: en })}
+                      {format(new Date(alert.timestamp), 'HH:mm', { locale: enUS })}
                     </span>
                   </div>
                 </div>

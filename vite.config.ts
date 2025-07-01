@@ -5,7 +5,9 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/IgnisMap/' : '/',
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'automatic'
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
@@ -71,12 +73,16 @@ export default defineConfig({
       }
     },
     rollupOptions: {
+      external: [
+        '@azure/core-tracing',
+        './globalThis-utils',
+        /^@azure\//
+      ],
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'ui-vendor': ['lucide-react', 'clsx'],
           'map-vendor': ['leaflet', 'react-leaflet', 'leaflet-draw', 'react-leaflet-draw'],
-          'azure-vendor': ['azure-maps-control', '@azure/cognitiveservices-computervision', '@azure/storage-blob'],
           'chart-vendor': ['recharts'],
           'geo-vendor': ['geotiff', 'proj4', 'turf', 'ml-matrix'],
           'emergency-services': [
@@ -113,10 +119,18 @@ export default defineConfig({
     ],
     exclude: [
       '@azure/cognitiveservices-computervision',
+      '@azure/core-tracing',
+      '@azure/ai-text-analytics',
       'geotiff'
     ]
   },
   define: {
     global: 'globalThis'
+  },
+  resolve: {
+    alias: {
+      './globalThis': 'globalThis',
+      './globalThis-utils': 'globalThis'
+    }
   }
 })

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Satellite, Calendar, Cloud, Leaf } from 'lucide-react'
 import { planetaryComputerService, SatelliteImagery as SatelliteImageryType, VegetationIndex } from '../services/planetaryComputerService'
 import { microsoftBiodiversityService } from '../services/microsoftBiodiversityService'
 import { format } from 'date-fns'
-import { en } from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 
 interface SatelliteImageryProps {
   location: { latitude: number, longitude: number }
@@ -240,7 +240,7 @@ const SatelliteImagery: React.FC<SatelliteImageryProps> = ({ location, className
                 >
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
-                    <span>{format(new Date(image.date), 'dd MMM', { locale: en })}</span>
+                    <span>{format(new Date(image.date), 'dd MMM', { locale: enUS })}</span>
                   </div>
                   <div className="flex items-center gap-1 mt-1">
                     <Cloud className="h-3 w-3" />
@@ -276,7 +276,7 @@ const SatelliteImagery: React.FC<SatelliteImageryProps> = ({ location, className
                     <div>
                       <span className="text-gray-600">Date:</span>
                       <p className="font-medium">
-                        {format(new Date(selectedImage.date), 'dd MMM yyyy, HH:mm', { locale: en })}
+                        {format(new Date(selectedImage.date), 'dd MMM yyyy, HH:mm', { locale: enUS })}
                       </p>
                     </div>
                     <div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Cloud, Droplets, Wind, RefreshCw } from 'lucide-react'
 import { useWeather } from '../contexts/WeatherContext'
 import { format } from 'date-fns'
-import { en } from 'date-fns/locale'
+import { enUS } from 'date-fns/locale'
 
 const WeatherCard: React.FC = () => {
   const { currentWeather, loading, refreshWeather } = useWeather()
@@ -109,7 +109,8 @@ const WeatherCard: React.FC = () => {
         {/* Last Update */}
         <div className="pt-2 border-t border-gray-200">
           <p className="text-xs text-gray-500 text-center">
-            Updated: {format(new Date(currentWeather.timestamp), 'HH:mm', { locale: en })}
+            // Replace 'en' with 'enUS' in format calls
+            Updated: {format(new Date(currentWeather.timestamp), 'HH:mm', { locale: enUS })}
           </p>
         </div>
       </div>

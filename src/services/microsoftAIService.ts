@@ -124,9 +124,9 @@ class MicrosoftAIService {
 
     try {
       const [sentimentResult, entitiesResult, keyPhrasesResult, languageResult] = await Promise.all([
-        this.textAnalyticsClient.analyzeSentiment([text], { language }),
-        this.textAnalyticsClient.recognizeEntities([text], { language }),
-        this.textAnalyticsClient.extractKeyPhrases([text], { language }),
+        this.textAnalyticsClient.analyzeSentiment([{ id: '1', text, language }]),
+        this.textAnalyticsClient.recognizeEntities([{ id: '1', text, language }]),
+        this.textAnalyticsClient.extractKeyPhrases([{ id: '1', text, language }]),
         this.textAnalyticsClient.detectLanguage([text])
       ]);
 
@@ -142,7 +142,7 @@ class MicrosoftAIService {
       return {
         sentiment: {
           score: sentiment.confidenceScores.positive,
-          label: sentiment.sentiment,
+          label: sentiment.sentiment === 'mixed' ? 'neutral' : sentiment.sentiment as 'positive' | 'negative' | 'neutral',
           confidence: Math.max(
             sentiment.confidenceScores.positive,
             sentiment.confidenceScores.negative,
@@ -193,13 +193,13 @@ class MicrosoftAIService {
         sensitivity
       };
 
-      const result = await this.anomalyDetectorClient.entireDetect(request);
+      const result = await this.anomalyDetectorClient.detectEntireSeriesAnomaly(request);
 
       if (!result.isAnomaly || !result.expectedValues || !result.upperMargins || !result.lowerMargins) {
         return null;
       }
 
-      return result.isAnomaly.map((isAnomaly, i) => ({
+      return result.isAnomaly.map((isAnomaly: boolean, i: number) => ({
         isAnomaly,
         severity: isAnomaly ? (Math.random() * 100) : 0, // Severity is not directly provided
         score: isAnomaly ? 1 : 0, // Score is not directly provided

@@ -323,8 +323,8 @@ class AzureService {
       alerts.push({
         id: evacuationGeofence.id,
         type: 'evacuation_zone' as const,
-        status: 'active',
-        priority: 'high'
+        status: 'active' as const,
+        priority: 'high' as const
       })
 
       return alerts
@@ -507,10 +507,18 @@ class AzureService {
       // Check if Azure Maps service is configured before attempting to use it
       const serviceStatus = azureMapsService.getServiceStatus()
       if (serviceStatus.configured) {
-        evacuationIsochrones = await azureMapsService.calculateEvacuationIsochrones(
+        const rawEvacuationIsochrones = await azureMapsService.calculateEvacuationIsochrones(
           location,
           [15, 30, 60, 120] // 15min, 30min, 1hr, 2hr evacuation zones
         )
+
+        // Transform the result to match expected type
+        evacuationIsochrones = rawEvacuationIsochrones.map(isochrone => ({
+          timeMinutes: isochrone.timeMinutes,
+          polygon: isochrone.polygon,
+          population: isochrone.population,
+          criticalFacilities: isochrone.criticalFacilities.length
+        }))
       } else {
         console.info('Azure Maps not configured, using mock isochrones')
         evacuationIsochrones = this.getMockIsochrones()
@@ -667,20 +675,20 @@ class AzureService {
       }
 
       // Enhanced fire stations data
-      const enhancedFireStations = resourceOptimization.fireStations.map(station => ({
+      const enhancedFireStations = resourceOptimization.fireStations.map((station: any) => ({
         id: station.id,
         distance: this.calculateDistance(location, station.location),
         responseTime: station.responseTime,
-        equipment: station.resources.map(r => r.type),
+        equipment: station.resources.map((r: any) => r.type),
         personnel: station.personnel.total,
         availability: 'available' as const,
         realTimeLocation: station.location,
-        optimalRoute: resourceOptimization.optimalDeployment.find(d => d.stationId === station.id)?.route,
+        optimalRoute: resourceOptimization.optimalDeployment.find((d: any) => d.stationId === station.id)?.route,
         trafficDelay: 5, // minutes
         fuelLevel: 85, // percentage
-        specializedEquipment: station.resources.map(resource => ({
+        specializedEquipment: station.resources.map((resource: any) => ({
           type: resource.type,
-          quantity: resource.quantity,
+          quantity: resource.count || resource.quantity, // Handle both property names
           operational: resource.available > 0
         }))
       }))
@@ -1059,7 +1067,7 @@ class AzureService {
         latitude: lat,
         longitude: lon,
         timeToReach: adjustedDistance / speed,
-        intensity: riskScore > 80 ? 'extreme' : riskScore > 60 ? 'high' : riskScore > 40 ? 'moderate' : 'low'
+        intensity: (riskScore > 80 ? 'extreme' : riskScore > 60 ? 'high' : riskScore > 40 ? 'moderate' : 'low') as 'low' | 'high' | 'extreme' | 'moderate'
       })
     }
     

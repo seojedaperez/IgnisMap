@@ -162,12 +162,12 @@ class BiodiversityAssessmentService {
         fireAdaptation: this.estimateFireAdaptation(species.class),
         evacuationPriority: this.calculateEvacuationPriority(species.conservationStatus)
       }))
-
+    
     // Convert real ecosystem data
     const ecosystemServices = realData.ecosystems.map(ecosystem => ({
       service: ecosystem.services[0]?.service || 'Regulación climática',
       value: ecosystem.services[0]?.value || 500000,
-      criticalityLevel: ecosystem.services[0]?.importance || 'high',
+      criticalityLevel: this.mapCriticalityLevel(ecosystem.services[0]?.importance || 'high'),
       replacementCost: (ecosystem.services[0]?.value || 500000) * 5
     }))
 
@@ -185,6 +185,17 @@ class BiodiversityAssessmentService {
       faunaSpecies,
       ecosystemServices,
       protectedAreas
+    }
+  }
+
+  // Move this method outside of convertRealBiodiversityData as a separate class method
+  private mapCriticalityLevel(importance: string): 'low' | 'moderate' | 'high' | 'critical' {
+    switch (importance) {
+      case 'medium': return 'moderate';
+      case 'low': return 'low';
+      case 'high': return 'high';
+      case 'critical': return 'critical';
+      default: return 'moderate';
     }
   }
 

@@ -303,24 +303,15 @@ class WindAnalysisService {
       const prev = forecast[i - 1].wind
       const curr = forecast[i].wind
       
-      // Check for significant wind direction changes
-      const directionChange = Math.abs(curr.direction - prev.direction)
-      if (directionChange > 45 && directionChange < 315) {
-        changes.push({
-          time: forecast[i].timestamp,
-          change: `Cambio de dirección del viento: ${directionChange.toFixed(0)}°`,
-          impact: directionChange > 90 ? 'critical' : 'high',
-          recommendation: 'REPOSICIONAR RECURSOS - El fuego cambiará de dirección. Evacuar personal de la nueva zona de riesgo.'
-        })
-      }
-      
-      // Check for wind speed increases
+      // Calculate wind speed increase
       const speedIncrease = curr.speed - prev.speed
+      
+      // Check for significant wind speed increases
       if (speedIncrease > 10) {
         changes.push({
           time: forecast[i].timestamp,
           change: `Aumento de velocidad del viento: +${speedIncrease.toFixed(1)} km/h`,
-          impact: speedIncrease > 20 ? 'critical' : 'high',
+          impact: (speedIncrease > 20 ? 'critical' : 'high') as 'low' | 'moderate' | 'high' | 'critical',
           recommendation: 'ALERTA CRÍTICA - Aumento de intensidad del fuego. Considerar retirada táctica.'
         })
       }
@@ -330,13 +321,18 @@ class WindAnalysisService {
         changes.push({
           time: forecast[i].timestamp,
           change: 'Cambio a condiciones atmosféricas inestables',
-          impact: 'high',
+          impact: 'high' as 'low' | 'moderate' | 'high' | 'critical',
           recommendation: 'COMPORTAMIENTO ERRÁTICO ESPERADO - Aumentar distancias de seguridad.'
         })
       }
     }
     
-    return changes
+    return changes as Array<{
+      time: string;
+      change: string;
+      impact: 'low' | 'moderate' | 'high' | 'critical';
+      recommendation: string;
+    }>
   }
 
   // Calculate optimal attack angles based on wind

@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
           let prediction;
           if (microsoftAI.isConfigured) {
             const vegetationData = { ndvi: 0.5, dryness: 0.6 };
-            const historicalFires = [];
+            const historicalFires: any[] = [];
             prediction = await microsoftAI.assessFireRisk(currentWeather, vegetationData, historicalFires);
           } else {
             prediction = await azureService.predictFireRisk(currentWeather, location);
