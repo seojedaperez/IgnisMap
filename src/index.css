@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-ember-coral hover:bg-ember-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 shadow-sm;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-ember-navy font-medium py-2 px-4 rounded-lg transition-colors duration-200 shadow-sm;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6;
+  }
+  
+  .risk-low {
+    @apply bg-green-100 text-green-800 border-green-200;
+  }
+  
+  .risk-medium {
+    @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+  }
+  
+  .risk-high {
+    @apply bg-ember-peach bg-opacity-20 text-ember-burgundy border-ember-peach;
+  }
+  
+  .risk-extreme {
+    @apply bg-ember-coral bg-opacity-20 text-ember-coral border-ember-coral;
+  }
+
+  /* Mobile-friendly components */
+  .mobile-card {
+    @apply rounded-xl shadow-sm border border-gray-200 p-3;
+  }
+
+  .mobile-btn {
+    @apply py-2 px-3 text-sm rounded-lg font-medium shadow-sm;
+  }
+
+  .mobile-input {
+    @apply w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-ember-coral focus:border-ember-coral;
+  }
+
+  .mobile-select {
+    @apply w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-ember-coral focus:border-ember-coral;
+  }
+
+  .mobile-tab {
+    @apply text-xs sm:text-sm whitespace-nowrap py-2 px-1 border-b-2 font-medium;
+  }
+}
+
+/* Leaflet map styles */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.75rem;
+}
+
+/* PWA install prompt */
+.pwa-install-prompt {
+  @apply fixed bottom-4 left-4 right-4 bg-ember-coral text-white p-4 rounded-lg shadow-lg z-50;
+}
+
+/* Loading animations */
+.loading-spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-ember-coral;
+}
+
+/* Fire animation */
+@keyframes fire-flicker {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  25% { opacity: 0.8; transform: scale(1.05) rotate(1deg); }
+  50% { opacity: 0.9; transform: scale(0.95) rotate(-1deg); }
+  75% { opacity: 0.85; transform: scale(1.02) rotate(0.5deg); }
+}
+
+.fire-icon {
+  animation: fire-flicker 2s ease-in-out infinite;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 640px) {
+  .card {
+    @apply p-3 rounded-lg;
+  }
+  
+  .btn-primary, .btn-secondary {
+    @apply py-1.5 px-3 text-sm;
+  }
+  
+  h1 {
+    @apply text-xl;
+  }
+  
+  h2 {
+    @apply text-lg;
+  }
+  
+  h3 {
+    @apply text-base;
+  }
+  
+  .text-sm {
+    @apply text-xs;
+  }
+}
